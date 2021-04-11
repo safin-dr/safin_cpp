@@ -4,38 +4,27 @@
 #include <chrono>
 #include <fstream>
 
-void Merge(int *arr, int first, int last) {
-    int mid, start, final;
-    int *new_arr = new int[100];
-    mid = (first + last) / 2;
-    start = first;
-    final = mid + 1;
-
-    for (int j = first; j <= last; j++)
-        if ((start <= mid) && ((final > last) || (arr[start] < arr[final]))) {
-            new_arr[j] = arr[i];
-            start++;
-            }
-        else {
-            new_arr[j] = arr[final];
-            final++;
+void qsort(int *arr, int first, int last) {
+    int x, temp;
+    int i = first, j = last;
+    x = arr[(i + j) / 2]; // опорный берется из середины
+    do {
+        while (arr[i] < x) {i++;}
+        while (arr[j] > x) {j--;}
+        if (i <= j) {
+            temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+            i++;
+            j--;
         }
-
-  for (int j = first; j <= last; j++)
-    arr[j] = new_arr[j];
-  delete[] new_arr;
-};
-
-void MergeSort(int *arr, int first, int last) {
-    if (first < last) {
-        MergeSort(arr, first, (first + last) / 2);
-        MergeSort(arr, (first + last) / 2 + 1, last);
-        Merge(arr, first, last);
-    }
+    } while (i < j);
+    if (first < j) {qsort(arr, first, j);}
+    if (i < last) {qsort(arr, i, last);}
 }
 
-void main() {
-    std::mt19937 engine(13); // 13 - ГЇГ°Г®ГЁГ§ГўГ®Г«ГјГ­Г®ГҐ Г·ГЁГ±Г«Г®
+int main() {
+    std::mt19937 engine(13); // 13 - произвольное число
     std::uniform_int_distribution<int> int_dist(0, 10000);
 
     std::ofstream fout;
@@ -43,7 +32,7 @@ void main() {
     fout.open("sorts.txt");
     for (int size = 500; size < 10001; size += 500) {
         int *arr = new int[size];
-        for (int i = 0; i < size++) {
+        for (int i = 0; i < size; i++) {
             arr[i] = int_dist(engine);
         }
         fout << size <<  '\t';
@@ -54,6 +43,5 @@ void main() {
         fout << nsec.count() << std::endl;
         delete []arr;
     }
-    fout.close();
     return 0;
 }

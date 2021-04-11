@@ -4,7 +4,7 @@
 #include <chrono>
 #include <fstream>
 
-void InsertionSort(int *arr, int size) // Г±Г®Г°ГІГЁГ°Г®ГўГЄГ  ГўГ±ГІГ ГўГЄГ Г¬ГЁ
+void InsertionSort(int *arr, int size) // сортировка вставками
 {
     for (int curr = 0; curr < size; curr++) {
         int min = curr;
@@ -23,7 +23,7 @@ void InsertionSort(int *arr, int size) // Г±Г®Г°ГІГЁГ°Г®ГўГЄГ  ГўГ±ГІГ ГўГЄГ Г¬Г
 
 int main(int argc, char* argv[])
 {
-    std::mt19937 engine(13); // 13 - ГЇГ°Г®ГЁГ§ГўГ®Г«ГјГ­Г®ГҐ Г·ГЁГ±Г«Г®
+    std::mt19937 engine(13); // 13 - произвольное число
     std::uniform_int_distribution<int> int_dist(0, 10000);
 
     std::ofstream fout;
@@ -33,18 +33,17 @@ int main(int argc, char* argv[])
         int *arr;
         arr = new int[size];
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < size; i++) {
             arr[i] = int_dist(engine);
         }
         fout << size << '\t';
-        auto start = chrono::high_resolution_clock::now();
-        InsertionSort(arr[], size);
-        auto end = chrono::high_resolution_clock::now();
+        auto start = std::chrono::high_resolution_clock::now();
+        InsertionSort(arr, size);
+        auto end = std::chrono::high_resolution_clock::now();
         auto nsec = end - start;
         fout << nsec.count() << std::endl;
         delete []arr;
     }
-    fout.close();
     return 0;
 }
 
