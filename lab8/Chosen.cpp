@@ -35,7 +35,7 @@ void MergeSort(int *arr, int first, int last) {
 }
 
 void main() {
-    std::mt19937 engine(13); // 13 - произвольное число
+    std::mt19937 engine(13); // 13 - ГЇГ°Г®ГЁГ§ГўГ®Г«ГјГ­Г®ГҐ Г·ГЁГ±Г«Г®
     std::uniform_int_distribution<int> int_dist(0, 10000);
 
     std::ofstream fout;
@@ -54,5 +54,6 @@ void main() {
         fout << nsec.count() << std::endl;
         delete []arr;
     }
+    fout.close();
     return 0;
 }
