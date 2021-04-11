@@ -6,7 +6,7 @@
 
 int main()
 {
-    std::mt19937 engine(13); // 13 - произвольное число
+    std::mt19937 engine(13); // 13 - ГЇГ°Г®ГЁГ§ГўГ®Г«ГјГ­Г®ГҐ Г·ГЁГ±Г«Г®
     std::uniform_int_distribution<int> int_dist(0, 10000);
 
     std::ofstream fout;
@@ -22,7 +22,7 @@ int main()
         auto start = chrono::high_resolution_clock::now();
         int temp;
 
-        // Сортировка массива пузырьком
+        // Г‘Г®Г°ГІГЁГ°Г®ГўГЄГ  Г¬Г Г±Г±ГЁГўГ  ГЇГіГ§Г»Г°ГјГЄГ®Г¬
         for (int i = 0; i < size - 1; i++) {
             for (int j = 0; j < size - i - 1; j++) {
                 if (arr[j] > arr[j + 1]) {
@@ -37,5 +37,6 @@ int main()
         fout << nsec.count() << std::endl;
         delete []arr;
     }
+    fout.close();
     return 0;
 }
